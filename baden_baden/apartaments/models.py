@@ -1,30 +1,43 @@
 from django.db import models
 
 
-class Apartments(models.Model):
-    title = models.CharField(max_length=100)
-    description = models.TextField()
-    ct = {
-        'ST': 'standart',
-        'MD': 'medium',
-        'LX': 'lux'
-    }
+class Hotel(models.Model):
+    name = models.CharField(max_length=255)
+    star_rating = models.PositiveIntegerField()
+    locations = models.CharField(max_length=255)
+    descriptions = models.TextField()
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=17, null=True, blank=True)
 
-    #category = models.CharField(max_length=5, choices=ct, default=ct['MD'])
-
-
+class HotelImg(models.Model):
+    pass
 
 
-
-    def __str__(self):
-        return f'{ self.title } id:{self.pk}'
-
-
-class ApartmentImages(models.Model):
-    image = models.ImageField(upload_to='apartment')
-    apartment = models.ForeignKey(Apartments, on_delete=models.CASCADE)
+class RoomType(models.Model):
+    pass
 
 
-class Characters(models.Model):
-    rooms = models.ImageField()
-    persone = models.IntegerField()
+class RoomImage(models.Model):
+    pass
+
+
+class Meal(models.Model):
+    pass
+
+
+class Room(models.Model):
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
+    type_name = models.CharField(max_length=255)
+    base_price = models.DecimalField(max_digits=10, decimal_places=2)
+
+
+class RoomPrice(models.Model):
+    pass
+
+
+class Booking(models.Model):
+    pass
+
+
+class Review(models.Model):
+    pass
