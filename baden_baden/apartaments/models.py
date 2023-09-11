@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+
 
 
 class Hotel(models.Model):
@@ -7,48 +7,35 @@ class Hotel(models.Model):
     star_rating = models.PositiveIntegerField()
     locations = models.CharField(max_length=255)
     descriptions = models.TextField()
+    check_in_time = models.TimeField()
+    check_out_time = models.TimeField()
 
 
 class HotelImg(models.Model):
     img = models.ImageField()
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
 
 
 class RoomType(models.Model):
-    category = models.CharField(max_length=25)
-    base_guest = models.PositiveIntegerField()
-    max_guest = models.PositiveIntegerField()
-    rooms_number = models.PositiveIntegerField()
-
-
-class RoomImage(models.Model):
-    img = models.ImageField()
-
-
-class Meal(models.Model):
-    title = models.CharField(max_length=125)
-    description = models.TextField()
-    price = models.PositiveIntegerField()
-
-
-class Host(models.Model):
-    img = models.ImageField()
-    phone = models.CharField(max_length=17)
-    name = models.CharField(max_length=125)
-
+   hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
+   type_name = models.CharField(max_length=255)
 
 class Room(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     type_name = models.CharField(max_length=255)
     base_price = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.ForeignKey(RoomType, on_delete=models.CASCADE)
-    host = models.ForeignKey(Host, on_delete=models.CASCADE)
+
+class RoomImage(models.Model):
+    img = models.ImageField()
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
 
 
 class RoomPrice(models.Model):
-    base_price = models.IntegerField()
-    weekend_price = models.IntegerField()
-    holiday_price = models.IntegerField()
-    extra_guest = models.PositiveIntegerField()
+    base_price = models.DecimalField(max_digits=10, decimal_places=2)
+    weekend_price = models.DecimalField(max_digits=10, decimal_places=2)
+    holiday_price = models.DecimalField(max_digits=10, decimal_places=2)
+    extra_guest = models.DecimalField(max_digits=10, decimal_places=2)
     room = models.OneToOneField(Room, on_delete=models.CASCADE)
 
 
@@ -59,22 +46,23 @@ class Sales(models.Model):
 
 
 class Booking(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    apartment = models.ForeignKey(Room, on_delete=models.CASCADE)
-    check_in = models.DateField()
-    check_out = models.DateField()
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    check_in_date = models.DateField()
+    check_out_date = models.DateField()
     guest = models.PositiveIntegerField()
-    total_price = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
+    is_confirmed = models.BooleanField(default=False)
 
     def __str__(self):
         return f' Booking {self.id}- {self.user.username}'
 
 
 class Review(models.Model):
-    star = models.PositiveIntegerField()
-    review = models.TextField()
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    star = models.PositiveIntegerField()
+    text = models.TextField()
+
 
 
 
