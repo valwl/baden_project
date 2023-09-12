@@ -1,30 +1,49 @@
 from django.db import models
 
 
-class Apartments(models.Model):
+class Apartment(models.Model):
+    # user = models.ForeignKey()
     title = models.CharField(max_length=100)
+    apartments_type = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
     description = models.TextField()
-    ct = {
-        'ST': 'standart',
-        'MD': 'medium',
-        'LX': 'lux'
-    }
 
-    #category = models.CharField(max_length=5, choices=ct, default=ct['MD'])
-
-
-
-
+    guests = models.PositiveIntegerField()
+    max_guests = models.PositiveIntegerField()
 
     def __str__(self):
-        return f'{ self.title } id:{self.pk}'
+        return f'<Title: {self.title}>\t<id: {self.pk}>'
 
 
-class ApartmentImages(models.Model):
-    image = models.ImageField(upload_to='apartment')
-    apartment = models.ForeignKey(Apartments, on_delete=models.CASCADE)
+class ApartmentPrice(models.Model):
+    apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE)
+    base_price = models.DecimalField(max_digits=10, decimal_places=2)
+    additional_guest_price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f'<apartment id: {self.apartment.pk}> <base price: {self.base_price}>'
 
 
-class Characters(models.Model):
-    rooms = models.ImageField()
-    persone = models.IntegerField()
+class ApartmentImage(models.Model):
+    apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE)
+    img = models.ImageField(upload_to='###')
+
+
+class Booking(models.Model):
+    # user = models.ForeignKey()
+    apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE)
+    check_in_date = models.DateField()
+    check_out_date = models.DateField()
+    guest_count = models.PositiveIntegerField()
+
+
+class Review(models.Model):
+    apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE)
+    # user = models.ForeignKey()
+    rating = models.PositiveIntegerField()
+    comment = models.TextField()
+
+
+class ReviewImage(models.Model):
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    img = models.ImageField(upload_to='###')
