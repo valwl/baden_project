@@ -1,6 +1,7 @@
 from django.db import models
 
 
+
 class Apartment(models.Model):
     # user = models.ForeignKey()
     title = models.CharField(max_length=100)
@@ -47,3 +48,4 @@ class Review(models.Model):
 class ReviewImage(models.Model):
     review = models.ForeignKey(Review, on_delete=models.CASCADE)
     img = models.ImageField(upload_to='###')
+
