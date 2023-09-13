@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+
+{% block main %}
+<div class="container">
+
+    {% if apartments %}
+    <ul class="apartments__list">
+
+        {% for apartment in apartments %}
+        <li class="apartment__instance">
+            
+            <h2 class="apartment__title">
+                {{ apartment.title }}
+            </h2>
+
+            <img src="{{ apartment.apartmentimage_set.first.img.url }}" alt="#">
+            
+        </li>
+        {% endfor %}
+
+    </ul>
+    {% endif %}
+
+</div>
+
+
+{% endblock %}
