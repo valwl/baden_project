@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from .models import Apartment
+from . models import Apartments
 
 
-def get_apartments_list(request):
-    apartments = Apartment.objects.all()
+def index(request):
+#   apartment = Apartments.objects.all()
+ #   context = {'apartment': apartment}
+    return render(request, 'apartaments/apartments_list.html')
 
-    return render(request, 'apartaments/apartments_list.html', {'apartments': apartments})
+
