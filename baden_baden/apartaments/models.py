@@ -27,7 +27,7 @@ class ApartmentPrice(models.Model):
 
 class ApartmentImage(models.Model):
     apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE)
-    img = models.ImageField(upload_to='###')
+    img = models.ImageField(upload_to='apartments/img')
 
 
 class Booking(models.Model):
@@ -47,5 +47,4 @@ class Review(models.Model):
 
 class ReviewImage(models.Model):
     review = models.ForeignKey(Review, on_delete=models.CASCADE)
-    img = models.ImageField(upload_to='###')
-
+    img = models.ImageField(upload_to='apartments/img/reviews')

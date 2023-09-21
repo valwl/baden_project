@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'apartaments.apps.ApartamentsConfig',
+    'user.apps.UserConfig',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+LOGIN_REDIRECT_URL = 'profile'
+
+AUTH_USER_MODEL = 'user.CustomUser'
+AUTHENTICATION_BACKEND = [
+    'user.custom_auth.AuthorisationBackend',
+]

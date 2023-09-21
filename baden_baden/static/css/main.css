@@ -16,26 +16,3 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-.container {
-    position: absolute;
-    
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    width: 1200px;
-    height: 90%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-color: #4F4557;
-
-    border-radius: 10px;
-
-}
-
-.title   {
-    color: #F4EEE0;
-}

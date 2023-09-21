@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+{% load static %}
+ {% block styles %}
+<link rel="stylesheet" href="{% static 'css/apartment_list.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="container">
+
+    {% if apartments %}
+    <ul class="apartments__list">
+
+        {% for apartment in apartments %}
+        <li class="apartment__instance">
+            <div class="apartment_img_container">
+                <img  class="apartment_img" src="{{ apartment.apartmentimage_set.first.img.url }}" alt="#">
+            </div>
+
+            <a href="{% url 'apartments_instance' apartment.pk %}">
+                <h2 class="apartment__title">
+                {{ apartment.title }}
+                </h2>
+            </a>
+
+
+
+            
+        </li>
+        {% endfor %}
+
+    </ul>
+    {% endif %}
+
+</div>
+
+{% endblock %}
