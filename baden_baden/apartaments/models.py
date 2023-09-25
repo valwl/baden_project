@@ -1,7 +1,6 @@
 from django.db import models
 
 
-
 class Apartment(models.Model):
     # user = models.ForeignKey()
     title = models.CharField(max_length=100)
