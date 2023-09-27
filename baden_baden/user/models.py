@@ -1,23 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User, AbstractUser, AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.contrib.auth.models import  AbstractBaseUser, PermissionsMixin
 from django.utils import timezone
+from . managers import CustomUserManager
 
-
-class CustomUserManager(BaseUserManager):
-    def create_user(self, email=None, phone_number=None, password=None, **kwargs):
-        if not email and not phone_number:
-            raise ValueError('email or phone number must be sade')
-        email = self.normalize_email(email) if email else None
-        user = self.model(email=email, phone_number=phone_number, **kwargs)
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, email=None, phone_number=None, password=None, **kwargs):
-        kwargs.setdefault('is_staff', True)
-        kwargs.setdefault('is_superuser', True)
-
-        return self.create_user(email, phone_number, password, **kwargs)
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):

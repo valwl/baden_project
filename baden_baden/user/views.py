@@ -29,17 +29,19 @@ def profile_view(request):
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
+        print('i m outside')
         if form.is_valid():
+            print('i m inside')
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            print(user)
             if user:
                 login(request, user)
                 return redirect('profile')
     form = AuthenticationForm()
     context = {'form': form}
     return render(request, 'user/login.html', context)
+
 
 @login_required
 def logout_view(request):
