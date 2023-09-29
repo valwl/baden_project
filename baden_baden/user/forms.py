@@ -1,8 +1,9 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from . models import CustomUser
+from django.core.exceptions import ValidationError
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -30,17 +31,30 @@ class CustomUserCreationForm(UserCreationForm):
         return user
 
 
-
-
-
-
-
-
-
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = '__all__'
+
+
+class LoginForm(AuthenticationForm):
+    class Meta:
+        model = CustomUser
+        fields = '__all__'
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if username:
+            if '@' in username:
+                user = CustomUser.objects.get(email=username)
+                if user is not None:
+                    return user.email
+            else:
+                user = CustomUser.objects.get(phone_number=username)
+                if user is not None:
+                    return user.phone_number
+        raise ValidationError('user with this email or phone_number not found')
+
 
 
 

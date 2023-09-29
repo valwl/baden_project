@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm, Authenti
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from . forms import CustomUserCreationForm
+from . forms import CustomUserCreationForm, LoginForm
 from . models import Profile
 
 
@@ -28,7 +28,7 @@ def profile_view(request):
 
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
+        form = LoginForm(data=request.POST)
         print('i m outside')
         if form.is_valid():
             print('i m inside')
@@ -38,7 +38,7 @@ def login_view(request):
             if user:
                 login(request, user)
                 return redirect('profile')
-    form = AuthenticationForm()
+    form = LoginForm()
     context = {'form': form}
     return render(request, 'user/login.html', context)
 
