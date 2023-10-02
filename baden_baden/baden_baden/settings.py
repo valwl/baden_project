@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'apartaments.apps.ApartamentsConfig',
     'user.apps.UserConfig',
+    'locate',
 ]
 
 MIDDLEWARE = [

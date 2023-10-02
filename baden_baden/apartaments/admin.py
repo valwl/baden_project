@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Apartment, ApartmentImage, ReviewImage, Review, ApartmentPrice, Booking
+from .models import Apartment, ApartmentImage, ReviewImage, Review, ApartmentPrice
 
 
 class AdminInlineApartmentImage(admin.TabularInline):
@@ -30,4 +30,4 @@ class AdminReview(admin.ModelAdmin):
 
 admin.site.register(Apartment, AdminApartment)
 admin.site.register(Review, AdminReview)
-admin.site.register(Booking)
+

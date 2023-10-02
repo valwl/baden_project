@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block main %}
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ apartment_form.as_p }}
+  {{ price_form_set.as_p }}
+  {{ img_form_set.as_p }}
+  <button type="submit">create_apartment</button>
+</form>
+{% endblock%}

@@ -4,4 +4,6 @@
 {% block main %}
 <img src="{{ profile.img.url }}" alt="" class="">
 <p> hello {{ user.username }}</p>
+<a href="{% url 'settings' %}">settings</a>
+<a href="{% url 'create_apartment' %}">create_apartment</a>
 {% endblock %}
