@@ -1,8 +1,17 @@
 from django import forms
-from . models import Reservation
+from . models import Booking
 
 
 class BookingForm(forms.ModelForm):
+    check_in_date = forms.DateField(widget=forms.DateInput(attrs={
+        'class': 'datepicker'
+    }))
+    check_out_date = forms.DateField(widget=forms.DateInput(attrs={
+        'class': 'datepicker'
+    }))
     class Meta:
-        model = Reservation
-        fields = ['check_in_date', 'check_out_date']
+        model = Booking
+        fields = ['check_in_date', 'check_out_date', 'guest_count']
+
+
+

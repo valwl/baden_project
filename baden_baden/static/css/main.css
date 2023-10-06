@@ -16,3 +16,10 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+.main_menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
+
+}

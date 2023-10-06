@@ -26,6 +26,7 @@ urlpatterns = [
     path('', include('apartaments.urls')),
     path('user/', include('user.urls')),
     path('locate/', include('locate.urls')),
+    path('profile/', include('user_area.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

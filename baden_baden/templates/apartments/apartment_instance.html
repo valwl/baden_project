@@ -6,5 +6,12 @@
     <div class="apartment_img_container">
         <img src="{{ apartment.apartmentimage_set.first.img.url }}" alt="" class="apartment_img">
     </div>
+    <div class="booking_container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">pay</button>
+        </form>
+    </div>
 </div>
 {% endblock%}

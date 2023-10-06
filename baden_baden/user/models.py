@@ -27,9 +27,3 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return self.email if self.email else self.phone_number
 
 
-class Profile(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    img = models.ImageField(upload_to='user/img', default='user/img/149017.png')
-
-    def __str__(self):
-        return f'profile of {self.user.email if self.user.email else self.user.phone_number}'

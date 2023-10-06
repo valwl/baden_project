@@ -4,17 +4,9 @@ from django.forms import inlineformset_factory
 
 
 class CreateApartmentForm(forms.ModelForm):
-    user = forms.IntegerField(widget=forms.HiddenInput())
     class Meta:
         model = Apartment
-        fields = ['title', 'description', 'address', 'max_guests', 'guests', 'apartments_type', 'user']
-
-
-    # def save(self, user, commit=True):
-    #     apartment = super().save(commit=False)
-
-
-
+        fields = ['title', 'description', 'address', 'max_guests', 'guests', 'apartments_type']
 
 
 class UpdateApartmentForm(forms.ModelForm):

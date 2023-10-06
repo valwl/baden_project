@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'apartaments.apps.ApartamentsConfig',
     'user.apps.UserConfig',
     'locate',
+    'booking',
+    'user_area',
 ]
 
 MIDDLEWARE = [
@@ -140,3 +142,9 @@ AUTH_USER_MODEL = 'user.CustomUser'
 AUTHENTICATION_BACKEND = [
     'user.custom_auth.AuthorisationBackend',
 ]
+
+
+#stripe
+
+STRIPE_PUBLIC_KEY = 'pk_test_51NwzRzEoF28QzXkJWP2wxv7dHcCqcLV3AQmIy2wUBPjyhz9oo2WlqST3y5i819uKXp9ck8sGTXmsvlIeqphfEWFR00t7v0GCPw'
+STRIPE_SECRET_KEY = 'sk_test_51NwzRzEoF28QzXkJSX5tamYjXlJ1qyey0Z8El4Guks0O0Rep5lCqRC5A7lJfWeZVHIQSf6DiOoXy7W2KxMFpKdmS00w1NV1MJ8'

@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, update_session_auth_hash
 from . forms import CustomUserCreationForm, LoginForm, CustomPasswordChangeForm, CustomUserChangeForm
-from . models import Profile
+from user_area.models import Profile
 from . custom_auth import AuthBackend
 from django.contrib import messages
 from django.db.utils import IntegrityError
@@ -28,11 +28,6 @@ def register(request):
     return render(request, 'user/register.html', context)
 
 
-@login_required
-def profile_view(request):
-    profile = Profile.objects.get(user=request.user)
-    context = {'profile': profile}
-    return render(request, 'user/profile.html', context)
 
 
 def login_view(request):
@@ -66,6 +61,7 @@ def logout_view(request):
 
 def past_booking(request):
     pass
+
 
 @login_required
 def settings(request):
